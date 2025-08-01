@@ -7,7 +7,8 @@ typedef struct struct_message {
 
 struct_message myData;
 
-uint8_t receiverMac[] = { 0x40, 0x4C, 0xCA, 0xF4, 0x88, 0x94 }; // MAC do ESP32-C3
+//B4:E6:2D:45:48:A6
+uint8_t receiverMac[] = { 0xB4, 0xE6, 0x2D, 0x45, 0x48, 0xA6 }; // MAC do ESP32-Receptor
 
 
 void OnDataSent(uint8_t *mac_addr, uint8_t status) {
