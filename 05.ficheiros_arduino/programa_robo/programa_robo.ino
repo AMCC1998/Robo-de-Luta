@@ -56,13 +56,13 @@ void loop() {
   int acel = mapChannelToPWM(IBus.readChannel(2));  // aceleração -255 a 255
   int dir = mapChannelToPWM(IBus.readChannel(3));   // direção -255 a 255
 
-  if (dir < -10) {
+  if (dir < -30) {
     virarEsquerda(255);
-  } else if (dir > 10) {
+  } else if (dir > 30) {
     virarDireita(255);
-  } else if (acel > 100) {
+  } else if (acel > 10) {
     moverFrente(255);
-  } else if (acel < -100) {
+  } else if (acel < -10) {      // garante os limites
     moverTras(255);
   } else {
     parar();
@@ -71,18 +71,29 @@ void loop() {
   // Controle da arma no canal 3 (index 2)
   uint16_t canalArma = IBus.readChannel(4);
   if (canalArma > 1500) {
-    ativaArma(1100);
+    ativaArma(1200);
   } else {
     desativaArma();
   }
 
 
-  Serial.print("Acel: ");
+  // Controle da arma no canal 7 servo Virar o robo
+  uint16_t canalServo = IBus.readChannel(6);
+  //Serial.print("Canal servo: ");
+  //Serial.println(canalServo);
+  if (canalServo > 2005) {
+    //ativaArma(1200);
+  } else {
+    //desativaArma();
+  }
+
+
+  /*Serial.print("Acel: ");
   Serial.print(acel);
   Serial.print("\tDir: ");
   Serial.print(dir);
   Serial.print("\tArma: ");
-  Serial.println(canalArma);
+  Serial.println(canalArma);*/
 
-  //delay(50);
+  delay(10);
 }
