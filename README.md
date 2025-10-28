@@ -45,7 +45,8 @@ Todo o processo de design, construção, parcerias e testes está a ser document
 Segue a jornada completa e todos os detalhes técnicos no meu canal:
 
 🔗 **[https://youtube.com/@amcc_projects?si=A5bpC3iiJzzU8RSe]** (Insira o link da playlist/canal aqui)
-🔗 **[JLCCNC](https://www.jlccnc.pt)** (Substitua `https://www.jlccnc.pt` pelo URL correto da JLCCNC)
+
+
 
 ## 🎯 Próximos Passos
 
@@ -55,3 +56,5 @@ Os próximos marcos no desenvolvimento incluem:
 * **Integração Eletrónica:** Instalação e programação dos sistemas de controlo, motores e bateria.
 * **Ajustes Finais:** Otimização dos sistemas de arma e defesa com base nos resultados dos testes.
 * **Competir:** Preparação para a **Robot Extreme Competition**!
+
+🔗 **[JLCCNC](https://www.jlccnc.pt)** (Substitua `https://www.jlccnc.pt` pelo URL correto da JLCCNC)
