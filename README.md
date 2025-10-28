@@ -57,4 +57,4 @@ Os próximos marcos no desenvolvimento incluem:
 * **Ajustes Finais:** Otimização dos sistemas de arma e defesa com base nos resultados dos testes.
 * **Competir:** Preparação para a **Robot Extreme Competition**!
 
-🔗 **[JLCCNC](https://www.jlccnc.pt)** (Substitua `https://www.jlccnc.pt` pelo URL correto da JLCCNC)
+🔗 **[JLCCNC](https://www.jlccnc.pt](https://jlccnc.com/?from=AndreCarvalho)** 
