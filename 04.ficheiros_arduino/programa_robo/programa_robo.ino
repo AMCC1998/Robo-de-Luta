@@ -3,6 +3,15 @@
 
 IBusBM IBus;
 
+unsigned long lastChangeTime = 0;
+bool failsafe = false;
+
+int last_acel = 0;
+int last_dir = 0;
+int last_arma = 0;
+
+int tempoFailSafe = 3000;
+
 Servo esc;
 const int motorArma = 3;
 const int velocidadeMinima = 1000;
@@ -42,6 +51,7 @@ void setup() {
   IBus.begin(Serial1);
   Serial.println("Inicializacao completa");
   parar();
+  lastChangeTime = millis();
 }
 
 // Mapeia canal iBUS (1000-2000) para valor entre -255 e 255 com zona morta
@@ -58,6 +68,40 @@ void loop() {
 
   int acel = mapChannelToPWM(IBus.readChannel(2));  // aceleração -255 a 255
   int dir = mapChannelToPWM(IBus.readChannel(3));   // direção -255 a 255
+  uint16_t canalArma = IBus.readChannel(4);
+
+  if (acel < -300) {
+    parar();
+    return;
+  }
+
+
+  //**************************** FAIL SAFE ****************************************
+  // Verifica se houve alguma mudança
+  if (acel != last_acel || dir != last_dir || canalArma != last_arma) {
+    last_acel = acel;
+    last_dir = dir;
+    last_arma = canalArma;
+    lastChangeTime = millis();
+    failsafe = false;
+  } else {
+    // Se nada mudou em 500 ms → FAILSAFE
+    if (millis() - lastChangeTime > tempoFailSafe) {
+      failsafe = true;
+    }
+  }
+
+  // Fail-safe ativo → parar tudo
+  if (failsafe) {
+    parar();
+    desativaArma();
+    Serial.println("⚠️ FAILSAFE — sem sinal!");
+    delay(50);
+    return;
+  }
+  // ****************************************************************
+
+
 
   //Positivar a velocidade
   int velocidade = acel < 0 ? acel * -1 : acel;
@@ -77,7 +121,7 @@ void loop() {
   }
 
   // Controle da arma no canal 3 (index 2)
-  uint16_t canalArma = IBus.readChannel(4);
+
   if (canalArma > 1500) {
     ativaArma(1200);
   } else {
